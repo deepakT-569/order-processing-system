@@ -1,4 +1,18 @@
+server:
+  port: 8083
+
 spring:
+  application:
+    name: payment-services
+  datasource:
+    url: jdbc:postgresql://localhost:5432/payment_db
+    username: postgres
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+      show-sql: true
+
   kafka:
     bootstrap-servers: localhost:9092
     producer:
@@ -7,4 +21,12 @@ spring:
     consumer:
       group-id: order-group
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+        spring.json.value.default.type: com.deepak.common.event.PaymentEvent
+        spring.json.trusted.packages: com.deepak.common.event
+
+app:
+  topic:
+    name: payment-events

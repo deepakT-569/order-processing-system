@@ -1,0 +1,29 @@
+# Order Processing System (Spring Boot Microservices)
+
+A complete end-to-end event-driven microservices system using **Spring Boot**, **Kafka**, and **PostgreSQL**.
+
+##Architecture
+- `order-service` — creates orders, publishes `OrderEvent`, updates status on `PaymentEvent`
+- `inventory-service` — consumes `OrderEvent`, updates stock, publishes `InventoryEvent`
+- `payment-service` — consumes `InventoryEvent`, simulates payment, publishes `PaymentEvent`
+- `common` — shared event models
+- `docker-compose.yml` — Kafka, Zookeeper, and Postgres setup
+
+##Tech Stack
+- Java 17
+- Spring Boot 3.3+
+- Spring Kafka
+- Spring Data JPA
+- PostgreSQL
+- Docker Compose
+
+##Run Locally
+```bash
+# start dependencies
+docker-compose up -d
+
+# build and run services
+mvn clean install -DskipTests
+mvn -pl order-service spring-boot:run
+mvn -pl inventory-service spring-boot:run
+mvn -pl payment-service spring-boot:run

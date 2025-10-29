@@ -19,6 +19,6 @@ public class OrderProducer {
 
     public void sendOrder(OrderEvent orderEvent) {
         kafkaTemplate.send(topicName, orderEvent.getOrderId(), orderEvent);
-        System.out.println("Order send to kafka topic '" + topicName + "': " + orderEvent);
+//        System.out.println("Order send to kafka topic '" + topicName + "': " + orderEvent);
     }
 }
