@@ -13,14 +13,6 @@ import java.time.Instant;
 
 @Service
 public class OrderConsumer {
-
-//    @KafkaListener(topics = "${app.topic.name}",groupId = "inventory-service")
-//    public void consumerOrder(OrderEvent orderEvent){
-//        System.out.println("Received order event: "+orderEvent);
-//        System.out.println("Updating inventory for item: "+orderEvent
-//                .getOrderId());
-//    }
-
     @Value("${app.topic.name}")
     private String topicName;
     private final StockRepository stockRepository;

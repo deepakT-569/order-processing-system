@@ -21,7 +21,8 @@ public class OrderService {
     private OrderRepository orderRepository;
     @Autowired
     private OrderProducer orderProducer;
-    public void createOrder(OrderDto orderDto){
+
+    public void createOrder(OrderDto orderDto) {
         String id = UUID.randomUUID().toString();
         Order order = new Order();
         order.setOrderId(id);
@@ -40,7 +41,8 @@ public class OrderService {
         orderEvent.setStatus("PENDING");
         orderProducer.sendOrder(orderEvent);
     }
-    public void updateStatus(String orderId, String status){
+
+    public void updateStatus(String orderId, String status) {
         orderRepository.findById(orderId).ifPresent(value -> {
             value.setStatus(status);
             orderRepository.save(value);

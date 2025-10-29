@@ -18,16 +18,10 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-//    @PostMapping
-//    public ResponseEntity<String> createOrder(@RequestBody OrderDto orderDto) {
-//        orderService.createOrder(orderDto);
-//        return ResponseEntity.ok("Order published Successfully!");
-//    }
-
     @PostMapping
     public ResponseEntity<String> createOrder(@RequestBody OrderDto orderDto) {
         orderService.createOrder(orderDto);
-        return new ResponseEntity<>("Order is saved to Db Successfully!",HttpStatus.CREATED);
+        return new ResponseEntity<>("Order is saved to Db Successfully!", HttpStatus.CREATED);
     }
 
 }
